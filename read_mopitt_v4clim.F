@@ -1,38 +1,20 @@
 c==============================================================================
 c==============================================================================
-c  Rebekah Esmaili notes (12/16/2019) Needs to be in BIG ENDIAN: gfortran -fconvert=big-endian read_mopitt_v4clim.F
-c
-c (C) Perot Systems Government Services, Inc.
-c
 c
 c NAME:
 c       READ_MOPITT_V4CLIM
 c
 c PURPOSE:
-c       A routine to read mopitt v4 climatology from a
-c       user specified filename
-c
-c CATEGORY:
-c       Science
-c
-c CALLING SEQUENCE:
-c       USE READ_MOPITT_V4CLIM
-c
-c KNOWN BUGS AND LIMITATIONS:
-c       None known.
+c       A routine to read mopitt v4 climatology and save to a file. This was
+c       was modified from a reader module within NUCAPS of the same name. Other
+c       input files exist, but this repository has the most recent one at the time
+c       that the program was writter. [RBE]
 c
 c MODIFICATION HISTORY:
 c       Written by:     Eric Maddy (09/15/2009)
-c                       Perot System Government Services
-c                       Fairfax, VA
-c                       Eric.Maddy@noaa.gov
+c       Updated by:     Rebekah Esmaili (12/16/2019
 c
-c  $Author: $
-c  $Date: $
-c  $Id: $
-c  $Log:  $
-c
-c
+c  Note: Needs to be in BIG ENDIAN: gfortran -fconvert=big-endian read_mopitt_v4clim.F [RBE]
 c==============================================================================
 c==============================================================================
 c
@@ -153,6 +135,9 @@ c     --------------------------------------------------------
       ENDDO  ! loop over month
 
       close(iounit)
+
+c     Save file in a human readable format
+c     --------------------------------------------------------
 
       OPEN(UNIT=1, FILE='./climatology_co.txt', STATUS='REPLACE')
       DO ipres = 1, mopitt_clim_npres
